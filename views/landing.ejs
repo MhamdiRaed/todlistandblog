@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Welcome to Daily Journal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            color: #333;
+        }
+        .content {
+            flex: 1;
+            padding: 60px 20px;
+        }
+        h1, h2 {
+            font-weight: 700;
+        }
+        .btn-primary {
+            background-color: #ff6347;
+            border: none;
+            font-weight: 600;
+        }
+        .btn-secondary {
+            background-color: #ffa07a;
+            border: none;
+            font-weight: 600;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+        .feature-box {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        a {
+            text-decoration: none;
+        }
+        .lead {
+            font-size: 1.25rem;
+            color: #555;
+        }
+        /* Full-width Navbar */
+        .navbar {
+            width: 100%;
+            background-color: #282c34;
+            padding: 10px;
+            position: fixed; /* Fix the navbar to the top */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: black !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('header') %>
+    <br><br><br>
+    <div class="container text-center content">
+        <h1 class="text-light">Welcome to RaedSpace</h1>
+        <p class="lead">A place to organize your thoughts, tasks, and ideas. Start your journey today!</p>
+
+        <div class="mt-4">
+            <a href="/register" class="btn btn-primary btn-lg mx-2">Sign Up</a>
+            <a href="/login" class="btn btn-secondary btn-lg mx-2">Log In</a>
+        </div>
+    </div>
+
+    <div class="container mt-5 text-center content">
+        <h2 class="text-light">Features</h2>
+        <div class="row mt-5">
+            <div class="col-md-4 feature-box">
+                <h4 class="text-info">Organize Your Tasks</h4>
+                <p>Keep track of your daily tasks and to-dos efficiently.</p>
+            </div>
+            <div class="col-md-4 feature-box">
+                <h4 class="text-warning">Write Your Thoughts</h4>
+                <p>Use the journal feature to express your thoughts and ideas.</p>
+            </div>
+            <div class="col-md-4 feature-box">
+                <h4 class="text-danger">Stay Productive</h4>
+                <p>Enhance your productivity with our simple and intuitive interface.</p>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') %>
+</body>
+</html>

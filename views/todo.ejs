@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>To-Do Management</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0; /* Remove default margin */
+        }
+        /* Full-width Navbar */
+        .navbar {
+            width: 100%;
+            background-color: #282c34;
+            padding: 15px;
+            position: fixed; /* Fix the navbar to the top */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: black !important;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top */
+            padding: 80px 20px; /* Add padding to avoid overlap with navbar */
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-dark, .btn-primary {
+            border-radius: 30px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-dark {
+            background-color: #ff6347;
+            border: none;
+        }
+        .btn-dark:hover {
+            background-color: #e5533f;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <%- include('header') %>
+
+    <div class="container content">
+        <div class="col-md-8"> <!-- Centered column -->
+            <div class="card">
+                <h2 class="text-danger">Manage Your To-Do Items</h2>
+                <form action="/todo" method="POST" class="mb-3">
+                    <div class="form-group">
+                        <label for="item">New To-Do Item:</label>
+                        <input type="text" class="form-control" id="item" name="item" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Add To-Do</button>
+                </form>
+                <ul class="list-group">
+                    <% todos.forEach(todo => { %>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <%= todo.item %>
+                            <form action="/todo/delete/<%= todo._id %>" method="POST" class="mb-0">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+
+            <% if (userId === 1) { %> <!-- Check if the user is admin -->
+                <div class="card mt-4">
+                    <h2>Admin: Manage To-Do Items</h2>
+                    <form action="/todo" method="POST">
+                        <div class="form-group">
+                            <label for="task">New Task for User:</label>
+                            <input type="text" class="form-control" id="task" name="item" placeholder="Enter task" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userId">Assign to User:</label>
+                            <select class="form-control" name="userId" required>
+                                <% users.forEach(function(user) { %>
+                                    <option value="<%= user.userId %>"><%= user.email %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Assign Task</button>
+                    </form>
+
+                    <h3>All To-Dos:</h3>
+                    <% todos.forEach(function(todo) { %>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong><%= todo.item %></strong> (Assigned to User ID <%= todo.userId %>)
+                            <form action="/todo/delete/<%= todo._id %>" method="POST" class="mb-0">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <%- include('footer') %>
+</body>
+</html>

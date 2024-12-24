@@ -1,0 +1,26 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* This will make the content area grow to fill the available space */
+}
+
+footer {
+    background-color: #282c34;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%; /* Ensures footer spans the full width */
+    position: relative;
+    bottom: 0;
+}
+
+

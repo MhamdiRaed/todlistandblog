@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Login - Daily Journal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0; /* Remove default margin */
+        }
+        /* Full-width Navbar */
+        .navbar {
+            width: 100%;
+            background-color: #282c34;
+            padding: 15px;
+            position: fixed; /* Fix the navbar to the top */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: black !important;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px; /* Add padding to avoid overlap with navbar */
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6347;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-control {
+            border-radius: 30px;
+            padding: 15px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .btn-dark {
+            background-color: #ff6347;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-dark:hover {
+            background-color: #e5533f;
+        }
+        footer {
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Full-width Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <%- include('header') %> <!-- This will keep your existing navbar content -->
+        </div>
+    </nav>
+
+    <div class="container content">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-dark btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('footer') %>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Your Posts</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0; /* Remove default margin */
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px; /* Add padding to avoid overlap with navbar */
+        }
+        .title-box {
+            background-color: #fff; /* White background for the title box */
+            border-radius: 10px; /* Rounded corners */
+            padding: 15px 20px; /* Padding inside the box */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for the box */
+            margin-bottom: 30px; /* Space below the title box */
+        }
+        .post-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            padding: 20px;
+            width: 100%; /* Responsive width */
+            max-width: 600px; /* Set a maximum width for posts */
+        }
+        .post-title {
+            font-size: 1.5rem; /* Increased font size */
+            font-weight: bold; /* Bold title */
+            margin: 0; /* Remove margin */
+            color: #333; /* Darker color for better visibility */
+        }
+        .btn-danger {
+            background-color: #ff4c4c; /* Custom red for delete button */
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #e63939; /* Darker red on hover */
+        }
+        footer {
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <%- include('header') %>
+
+    <div class="container content">
+        <div class="title-box">
+            <h2 class="text-danger text-center">Your Posts</h2>
+        </div>
+        <div class="d-flex flex-column w-100">
+            <% posts.forEach(post => { %>
+                <div class="post-card">
+                    <h5 class="post-title">
+                        <a class="text-dark" href="/posts/<%= post._id %>"><%= post.title %></a>
+                    </h5>
+                    <p class="mb-1"><%= post.content.substring(0, 100) %><%= post.content.length > 100 ? '...' : '' %></p>
+                    <form action="/posts/delete/<%= post._id %>" method="POST" class="text-right">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('footer') %>
+</body>
+</html>
